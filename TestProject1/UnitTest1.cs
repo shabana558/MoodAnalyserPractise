@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using MoodAnalyserPractise;
+
 
 namespace TestProject1
 {
@@ -78,6 +78,7 @@ namespace TestProject1
         /// Using Reflection-UC4-Default Constructor
         /// </summary>
         [TestMethod]
+        [TestCategory("Reflection")]
         public void Reflection_Return_Default_Constructor()
         {
             MoodAnalyser expected = new MoodAnalyser();
@@ -95,6 +96,7 @@ namespace TestProject1
         }
         //Negative Case
         [TestMethod]
+        [TestCategory("Reflection")]
         public void Reflection_Return_Default_Constructor_No_Class_Found()
         {
             string expected = "Class not found";
@@ -112,6 +114,7 @@ namespace TestProject1
         }
         //Negative Case
         [TestMethod]
+        [TestCategory("Reflection")]
         public void Reflection_Return_Default_Constructor_No_Constructor_Found()
         {
             string expected = "Constructor not found";
@@ -132,6 +135,7 @@ namespace TestProject1
         /// Using Reflection-UC5-Parameterized Constructor
         /// </summary>
         [TestMethod]
+        [TestCategory("Reflection")]
         public void Reflection_Return_Parameterized_Constructor()
         {
             string message = "I am in happy mood";
@@ -151,6 +155,7 @@ namespace TestProject1
         }
         //Invalid case
         [TestMethod]
+        [TestCategory("Reflection")]
         public void Reflection_Return_Parameterized_Class_Invalid()
         {
             string message = "I am in happy mood";
@@ -166,6 +171,28 @@ namespace TestProject1
             {
                 Assert.AreEqual(expected, actual1.Message);
             }
+        }
+        /// <summary>
+        /// UC6-Using Reflection-Invoke Method
+        /// </summary>
+        [TestMethod]
+        [TestCategory("Reflection")]
+        public void Reflection_Return_Method()
+        {
+            string expected = "happy";
+            MoodAnalyserFactory factory = new MoodAnalyserFactory();
+            string actual = factory.InvokeAnalyserMethod("happy", "AnalyzeMood");
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        [TestCategory("Reflection")]
+        public void Reflection_Return_Invalid_Method()
+        {
+            string expected = "happy";
+            MoodAnalyserFactory factory = new MoodAnalyserFactory();
+            string actual = factory.InvokeAnalyserMethod("happy", "Analyze");
+
+            Assert.AreEqual(expected, actual);
         }
     }
 }
