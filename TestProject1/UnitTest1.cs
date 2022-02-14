@@ -1,12 +1,15 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MoodAnalyserPractise;
-
+using System;
+using System.Reflection;
 
 namespace TestProject1
 {
     [TestClass]
     public class UnitTest1
     {
+        private readonly object factory;
+
         //MoodAnalyser moodAnalyser;
         //string message = " I am in happy Mood";
         [TestInitialize]
@@ -193,6 +196,29 @@ namespace TestProject1
             string actual = factory.InvokeAnalyserMethod("happy", "Analyze");
 
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestCategory("Reflection")]
+        [TestMethod]
+        public void Given_MoodAnalyser_Using_Reflection_Set_Field()
+        {
+            string value = "Iam in sad mood";
+            string fieldName = "message";
+            string expected = "I am in sad mood";
+            string actual = "";
+            try
+            {
+                // MoodAnalyserFactory=new MoodAnalyserFactory();
+                //Act
+                actual = factory.SetField(value, fieldName);
+            }
+            catch (CustomMoodAnalyserException exception)
+            {
+                //Assert
+                throw new Exception(exception.Message);
+            }
+            Assert.AreEqual(expected, actual);
+
         }
     }
 }

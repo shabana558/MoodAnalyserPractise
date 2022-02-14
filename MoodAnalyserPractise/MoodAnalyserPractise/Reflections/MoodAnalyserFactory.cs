@@ -78,5 +78,40 @@ namespace MoodAnalyserPractise
                 throw new CustomException(CustomException.ExceptionType.METHOD_NOT_FOUND, "Method not found");
             }
         }
+        public string SetField(string value, string fieldName)
+        {
+            try
+            {
+                MoodAnalyserFactory fac = new MoodAnalyserFactory();
+                MoodAnalyser obj = (MoodAnalyser)fac.CreateMoodAnalyserObject("MoodAnalyserPractise.MoodAnalyser", "MoodAnalyser");
+                Type type = typeof(MoodAnalyser);
+                FieldInfo field = type.GetField(fieldName, BindingFlags.Public | BindingFlags.Instance);
+                if (field != null)
+                {
+                    if (value == null)
+                    {
+                        throw new CustomException(CustomException.ExceptionType.NULL_EXCEPTION, "message should not be null");
+                    }
+                    field.SetValue(obj, value);
+                    return obj.message;
+
+                }
+                throw new CustomException(CustomException.ExceptionType.FIELD_NOT_FOUND, "fieldName should not be null");
+            }
+                catch (Exception ex)
+                {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
+            
+
+            
+
+           
+
+            
+
+   
+
