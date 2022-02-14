@@ -8,5 +8,10 @@ namespace TestProject1
         {
             throw new NotImplementedException();
         }
+
+        internal object CreateMoodAnalyserParameterizedObject(string v1, string v2, string message)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

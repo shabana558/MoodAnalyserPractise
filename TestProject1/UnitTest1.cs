@@ -93,7 +93,7 @@ namespace TestProject1
                 throw new System.Exception(ex.Message);
             }
         }
-        //Neagtive Case
+        //Negative Case
         [TestMethod]
         public void Reflection_Return_Default_Constructor_No_Class_Found()
         {
@@ -110,7 +110,7 @@ namespace TestProject1
                 Assert.AreEqual(expected, actual.Message);
             }
         }
-        //Neagtive Case
+        //Negative Case
         [TestMethod]
         public void Reflection_Return_Default_Constructor_No_Constructor_Found()
         {
@@ -125,6 +125,46 @@ namespace TestProject1
             catch (CustomException actual)
             {
                 Assert.AreEqual(expected, actual.Message);
+            }
+        }
+
+        /// <summary>
+        /// Using Reflection-UC5-Parameterized Constructor
+        /// </summary>
+        [TestMethod]
+        public void Reflection_Return_Parameterized_Constructor()
+        {
+            string message = "I am in happy mood";
+            MoodAnalyser expected = new MoodAnalyser(message);
+            object actual = null;
+            try
+            {
+                MoodAnalyserFactory factory = new MoodAnalyserFactory();
+                actual = factory.CreateMoodAnalyserParameterizedObject("MoodAnalyserProblem2.MoodAnalyser", "MoodAnalyser", message);
+
+            }
+            catch (CustomException ex)
+            {
+                throw new System.Exception(ex.Message);
+            }
+            actual.Equals(expected);
+        }
+        //Invalid case
+        [TestMethod]
+        public void Reflection_Return_Parameterized_Class_Invalid()
+        {
+            string message = "I am in happy mood";
+            MoodAnalyser expected = new MoodAnalyser(message);
+            object actual = null;
+            try
+            {
+                MoodAnalyserFactory factory = new MoodAnalyserFactory();
+                actual = factory.CreateMoodAnalyserParameterizedObject("MoodAnalyserProblem2.MoodAna", "MoodAnalyser", message);
+
+            }
+            catch (CustomException actual1)
+            {
+                Assert.AreEqual(expected, actual1.Message);
             }
         }
     }
